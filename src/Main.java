@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 //        testStringBuilder();
-//        testString();
-        testCharArray();
+        testString();
+//        testCharArray();
     }
 
-    // time = 14
-    // memory = 1607344
+    // time = 1987000
+    // memory = 2543008
     private static void testStringBuilder() {
         Runtime.getRuntime().gc();
         LocalDateTime start = LocalDateTime.now();
@@ -20,14 +20,14 @@ public class Main {
         for (int i = 0; i < 10000; i++) {
             stringBuilder.append("Hello World");
         }
-        System.out.print("stringBuilder = " + stringBuilder);
+        System.out.print(stringBuilder);
         LocalDateTime end = LocalDateTime.now();
-        System.out.print("\ntime = " + Duration.between(start, end).toMillis());
+        System.out.print("\ntime = " + Duration.between(start, end).toNanos());
         System.out.println("\nmemory = " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
     }
 
-    // time = 54
-    // memory = 37826496
+    // time = 57396000
+    // memory = 17167504
     private static void testString() {
         Runtime.getRuntime().gc();
         LocalDateTime start = LocalDateTime.now();
@@ -35,19 +35,19 @@ public class Main {
         for (int i = 0; i < 10000; i++) {
             string += "Hello World";
         }
-        System.out.print("string = " + string);
+        System.out.print(string);
         LocalDateTime end = LocalDateTime.now();
-        System.out.print("\ntime = " + Duration.between(start, end).toMillis());
+        System.out.print("\ntime = " + Duration.between(start, end).toNanos());
         System.out.println("\nmemory = " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
     }
 
-    // time = 90
-    // memory = 1636448
+    // time = 1990000
+    // memory = 2308856
     private static void testCharArray() {
         Runtime.getRuntime().gc();
         LocalDateTime start = LocalDateTime.now();
         char[] charArray = new char[110000];
-        for (int i = 0; i < 10000; i = i + 11) {
+        for (int i = 0; i < 110000; i = i + 11) {
             charArray[i] = 'H';
             charArray[i+1] = 'e';
             charArray[i+2] = 'l';
@@ -60,15 +60,12 @@ public class Main {
             charArray[i+9] = 'l';
             charArray[i+10] = 'd';
         }
-//        System.out.print("charArray = " + charArray.length);
-        for (int i = 0; i < 110000; i = i + 1) {
-            System.out.print(charArray[i]);
-        }
-//        for (char c : charArray) {
-//            System.out.print(c);
+//        for (int i = 0; i < 110000; i = i + 1) {
+//            System.out.print(charArray[i]);
 //        }
+        System.out.print(charArray);
         LocalDateTime end = LocalDateTime.now();
-        System.out.print("\ntime = " + Duration.between(start, end).toMillis());
+        System.out.print("\ntime = " + Duration.between(start, end).toNanos());
         System.out.println("\nmemory = " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
     }
 
