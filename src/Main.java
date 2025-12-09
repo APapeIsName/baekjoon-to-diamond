@@ -76,4 +76,33 @@ public class Main {
             System.out.print((char) (ch + 65));
         }
     }
+
+    // AI 피드백 확인
+    public static void secondFixed() throws IOException {
+        int[] countArr = new int[26];
+
+        int c;
+        // isAlpha(c) 처럼 체크해도 되지만, 문제 조건상 알파벳만 들어오므로
+        // 개행문자(10) 전까지 읽는 것으로 처리해도 무방
+        while ((c = System.in.read()) >= 'A') {
+            // 1. 대소문자 구분 없이 소문자로 통일하여 카운팅 (비트 연산 활용)
+            // 'A' | 32 => 'a', 'a' | 32 => 'a'
+            countArr[(c | 32) - 'a']++;
+        }
+
+        int max = -1;
+        int maxIdx = -2; // ? 출력용 플래그
+
+        for (int i = 0; i < 26; i++) {
+            if (countArr[i] > max) {
+                max = countArr[i];
+                maxIdx = i;
+            } else if (countArr[i] == max) {
+                maxIdx = -2; // 중복 발생
+            }
+        }
+
+        // 삼항 연산자로 깔끔하게 출력
+        System.out.print(maxIdx == -2 ? '?' : (char) (maxIdx + 'A'));
+    }
 }
