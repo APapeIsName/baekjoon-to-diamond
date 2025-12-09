@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        testStringBuilder();
-        testString();
+        testStringBuilder();
+//        testString();
 //        testCharArray();
     }
 
-    // time = 1987000
-    // memory = 2543008
+    // time = 2109000
+    // memory = 2542576
     private static void testStringBuilder() {
         Runtime.getRuntime().gc();
         LocalDateTime start = LocalDateTime.now();
@@ -26,8 +26,8 @@ public class Main {
         System.out.println("\nmemory = " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
     }
 
-    // time = 57396000
-    // memory = 17167504
+    // time = 58081000
+    // memory = 98422424
     private static void testString() {
         Runtime.getRuntime().gc();
         LocalDateTime start = LocalDateTime.now();
