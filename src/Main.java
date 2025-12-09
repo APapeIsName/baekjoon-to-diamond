@@ -35,6 +35,7 @@ public class Main {
         System.out.print(cycleCount);
     }
 
+    // 부족했던 점 : 1. 단순 숫자 계산인데 StringBuilder 로 해결하려 했던 점 2. do-while 문 까먹고 boolean 하나 더 만든 거
     // 102ms
     public static void second() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
