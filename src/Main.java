@@ -78,6 +78,7 @@ public class Main {
     }
 
     // AI 피드백 확인
+    // + new 키워드 공부하기
     public static void secondFixed() throws IOException {
         int[] countArr = new int[26];
 
