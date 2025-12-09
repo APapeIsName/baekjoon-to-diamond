@@ -2,9 +2,10 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        first();
+        second();
     }
 
+    // 120ms -> 최적화 필요
     public static void first() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -32,5 +33,22 @@ public class Main {
         }
 
         System.out.print(cycleCount);
+    }
+
+    // 102ms
+    public static void second() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(reader.readLine());
+
+        int copy = n;
+        int count = 0;
+
+        do {
+            n = ((n % 10) * 10) + (((n / 10) + (n % 10)) % 10);
+            count++;
+        } while(copy != n);
+
+        System.out.print(count);
     }
 }
