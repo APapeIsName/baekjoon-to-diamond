@@ -45,7 +45,7 @@ public class Main {
         System.out.print((char) (maxIndex + 65));
     }
 
-
+    // 부족했던 점 : 1. System.in 사용 안 했던 거. 2. 단순히 26개 배열로 처리 가능했던 걸 놓쳤던 점
     // 최적화 -> 132ms
     public static void second() throws IOException {
         int[] countArr = new int[26];
