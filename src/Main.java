@@ -2,53 +2,78 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        second();
+        first();
     }
 
-    // 120ms -> 최적화 필요
+    // 256ms -> 최적화 필요
     public static void first() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String read = reader.readLine();
-        StringBuilder readSb = new StringBuilder(read);
-        int cycleCount = 0;
-        boolean isFirst = true;
+        char[] chArr = br.readLine().toUpperCase().toCharArray();
+        int[] countArr = new int[26];
 
-        while (isFirst || !read.equals(readSb.toString())) {
-            if (readSb.length() < 2) {
-                readSb.insert(0, "0");
-            }
-
-            int leftLastNum = readSb.charAt(1) - 48;
-            int sum = readSb.charAt(0) + leftLastNum - 48;
-
-            int res = (leftLastNum * 10) + (sum % 10);
-
-            readSb.delete(0, 2);
-            readSb.append(res);
-
-            cycleCount++;
-
-            isFirst = false;
+        int index;
+        for (char ch : chArr) {
+            index = ch - 65;
+            countArr[index]++;
         }
 
-        System.out.print(cycleCount);
+        int max = 0;
+        int maxIndex = 0;
+        for (int i = 0; i < 13; i++) {
+            int left = countArr[12 - i];
+            int right = countArr[13 + i];
+            if (left > max) {
+                max = left;
+                maxIndex = 12 - i;
+            }
+            if (right > max) {
+                max = right;
+                maxIndex = 13 + i;
+            }
+        }
+
+        for (int i = 0; i < 13; i++) {
+            int left = countArr[12 - i];
+            int right = countArr[13 + i];
+            if ((left == max && maxIndex != 12 - i) || (right == max && maxIndex != 13 + i)) {
+                System.out.print('?');
+                return;
+            }
+        }
+
+        System.out.print((char) (maxIndex + 65));
     }
 
-    // 102ms
+
+    // 최적화 -> 132ms
     public static void second() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int[] countArr = new int[26];
 
-        int n = Integer.parseInt(reader.readLine());
+        int c;
+        while((c = System.in.read()) > 64) {
+            if (c < 91) {
+                countArr[c - 65]++;
+            } else {
+                countArr[c - 97]++;
+            }
+        }
 
-        int copy = n;
-        int count = 0;
+        int max = 0;
+        int ch = -2;
+        for (int i = 0; i < 26; i++) {
+            if (countArr[i] > max) {
+                max = countArr[i];
+                ch = i;
+            }  else if (countArr[i] == max) {
+                ch = -2;
+            }
+        }
 
-        do {
-            n = ((n % 10) * 10) + (((n / 10) + (n % 10)) % 10);
-            count++;
-        } while(copy != n);
-
-        System.out.print(count);
+        if (ch == -2) {
+            System.out.print('?');
+        } else {
+            System.out.print((char) (ch + 65));
+        }
     }
 }
