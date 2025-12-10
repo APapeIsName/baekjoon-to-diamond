@@ -1,80 +1,42 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
+    // 104ms
+    // 고쳐야 할 점 : 1.StringTokenizer 를 사용해보기
+    // 2.만약 범위가 늘어나면 안 좋은 코드가 될 수 있음. 이럴 땐 메모리를 써서 시간 복잡도를 해결해보기. -> 지금 거는 2번 for문을 돌게 됨 -> 범위가 늘어나면 안 좋아짐 -> 미리 마지막까지 돈 다음 거기서 배열 자르기
     public static void main(String[] args) throws IOException {
-        second();
-    }
+        BufferedReader br = new BufferedReader((new InputStreamReader(System.in)));
 
-    // 172ms
-    // 고쳐야 할 점 : 1.Scanner 는 느림. 정규식 검사 과정을 거치기 때문. BufferedReader 를 쓰자
-    // 2.지금은 계산식보다도 모양만 보는 알고리즘인데 int 를 사용하지 말고 String 으로 처리했어도 됐다.
-    public static void first() throws IOException {
-        // 1~99999 정수
-        Scanner sc = new Scanner(System.in);
-        StringBuilder res = new StringBuilder();
+        String[] arr = br.readLine().split(" ");
+        int first = Integer.parseInt(arr[0]);
+        int last = Integer.parseInt(arr[1]);
 
-        int n;
-        List<Integer> numList = new ArrayList<>();
+        int count = 0;
+        int num = 1;
+        int firstSum = 0;
 
-        while ((n = sc.nextInt()) != 0) {
-            while (n != 0) {
-                numList.add(n % 10);
-                n /= 10;
+        for (int i = 1; i < first; i++) {
+            if (count == num) {
+                count = 0;
+                num++;
             }
-
-            boolean isEqual = true;
-            int listSize = numList.size();
-            for (int i = 0; i < listSize / 2; i++) {
-                isEqual = numList.get(i) == numList.get(listSize - 1 - i);
-                if (!isEqual) {
-                    break;
-                }
-            }
-
-            if (isEqual) {
-                res.append("yes\n");
-            } else {
-                res.append("no\n");
-            }
-
-            numList.clear();
+            firstSum += num;
+            count++;
         }
 
-        System.out.print(res);
-        sc.close();
-    }
+        count = 0;
+        num = 1;
+        int lastSum = 0;
 
-    // 100ms
-    public static void second() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        StringBuilder res = new StringBuilder();
-
-        while (true) {
-            String s = br.readLine();
-
-            if (s.equals("0")) break;
-
-            int len = s.length();
-
-            boolean isEqual = true;
-
-            for (int i = 0; i < len / 2; i++) {
-                if (s.charAt(i) != s.charAt(len - 1 - i)) {
-                    isEqual = false;
-                    break;
-                }
+        for (int i = 1; i <= last; i++) {
+            if (count == num) {
+                count = 0;
+                num++;
             }
-
-            if (isEqual) {
-                res.append("yes\n");
-            } else {
-                res.append("no\n");
-            }
+            lastSum += num;
+            count++;
         }
 
-        System.out.print(res);
-
+        System.out.print(lastSum - firstSum);
     }
 }
