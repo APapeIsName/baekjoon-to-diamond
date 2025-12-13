@@ -2,24 +2,25 @@ import java.io.*;
 
 public class Main {
 
-    // 108ms, 약수의 공식을 이용한 풀이 방법.
-    // 참고할 점 : StringTokenizer 를 쓸 땐 데이터가 많을 때
+    // 104ms, 수학적인 공식에 대해 더 생각해볼 필요가 있음.
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader((System.in)));
 
-        int nCount = Integer.parseInt(br.readLine());
+        int count = Integer.parseInt(br.readLine());
+        int[] numbers = new int[count];
+        int max = 0;
 
-        String[] numbersArr = br.readLine().split(" ");
-
-        int min = 9999999;
-        int max = -1;
-
-        for (int i = 0; i < nCount; i++) {
-            int now = Integer.parseInt(numbersArr[i]);
-            if (now > max) max = now;
-            if (now < min) min = now;
+        String[] numberSplit = br.readLine().split(" ");
+        for (int i = 0; i < count; i++) {
+            numbers[i] = Integer.parseInt(numberSplit[i]);
+            if (numbers[i] > max) max = numbers[i];
         }
 
-        System.out.print(max * min);
+        double total = 0.0;
+        for (int i = 0; i < count; i++) {
+            total += ((double) numbers[i] / max);
+        }
+
+        System.out.print((total / count) * 100);
     }
 }
