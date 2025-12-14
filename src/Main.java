@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
 
-    // 108ms. 크기가 클 경우엔 배열로 바꿔야 한다는 생각을 갖고 있어야 함
+    // 108ms. 크기가 클 경우엔 boolean 배열로 바꿔야 한다는 생각을 갖고 있어야 함
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
